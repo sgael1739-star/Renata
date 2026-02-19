@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Ti - Especial</title>
+    <style>
+        /* CONFIGURACIÓN GENERAL */
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #ffe4e1;
+            /* Rosa claro */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+            /* Para que los corazones no creen barras de desplazamiento */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            color: #d81b60;
+        }
+        /* BOTÓN SUPERIOR (NAVEGACIÓN) */
+        
+        .nav-container {
+            position: absolute;
+            top: 20px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .btn-nav {
+            background-color: #ff85a2;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: 0.3s;
+        }
+        
+        .btn-nav:hover {
+            background-color: #f06292;
+        }
+        /* CONTENIDO PRINCIPAL */
+        
+        .card {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 30px;
+            border-radius: 30px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(255, 105, 180, 0.2);
+            z-index: 10;
+            max-width: 80%;
+        }
+        
+        .btn-rosa {
+            background-color: #ff4081;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            margin-bottom: 20px;
+        }
+        
+        .btn-rosa:active {
+            transform: scale(0.95);
+        }
+        
+        #texto-abril {
+            display: none;
+            /* Se oculta al inicio */
+            font-size: 22px;
+            font-weight: bold;
+            margin-top: 20px;
+            animation: fadeIn 1s;
+        }
+        /* CONTROLES DE MÚSICA */
+        
+        .music-controls {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+        
+        .btn-music {
+            background: #ffffff;
+            border: 2px solid #ff4081;
+            color: #ff4081;
+            padding: 5px 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        /* EFECTO DE CORAZONES */
+        
+        .heart {
+            position: fixed;
+            top: -1vh;
+            font-size: 20px;
+            user-select: none;
+            z-index: 1;
+            animation: fall linear forwards;
+        }
+        
+        @keyframes fall {
+            to {
+                transform: translateY(105vh) rotate(360deg);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        /* SECCIÓN OCULTA (LA OTRA PARTE) */
+        
+        #otra-parte {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #ffc1e3;
+            z-index: 20;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="nav-container">
+        <button class="btn-nav" onclick="irAOtraParte()">Ir a otra parte</button>
+    </div>
+
+    <div class="card" id="vista-principal">
+        <button class="btn-rosa" onclick="mostrarTexto()">Para ti</button>
+
+        <div id="texto-abril">
+            🌸 Renata... <br> “Lo que aún no encuentro” Hay sentimientos que todavía no sé nombrar. No son amor, no son ilusión, ni siquiera son esperanza. Son más bien como un espacio vacío que no duele, pero tampoco está completo. Es extraño hablar
+            de algo que no ha pasado, de algo que no siento todavía, pero que tal vez podría sentir algún día. Porque no te conozco. No sé cuál es tu risa cuando estás de verdad feliz, ni qué haces cuando el mundo te pesa, ni qué música te acompaña cuando
+            nadie te ve. No hemos hablado lo suficiente como para decir que me gustas, ni lo suficiente como para decir que no. Y tal vez eso está bien. No quiero inventar emociones que no existen. No quiero forzar mariposas donde solo hay curiosidad.
+            Lo único que sé es que me gustaría conocerte. Sin presión. Sin esa idea de “ligar” flotando en el aire. Sin expectativas que arruinen lo simple. Solo hablar. Reírnos de cosas tontas. Descubrir si coincidimos en algo o si somos completamente
+            distintos y aun así interesantes el uno para el otro. Porque a veces lo más bonito no es empezar con un “me gustas”, sino con un “¿y si nos conocemos mejor?”. No he encontrado esos sentimientos aún, pero tampoco estoy cerrado a encontrarlos.
+            Tal vez no aparezcan. Tal vez sí. Pero antes de cualquier cosa, me gustaría que fuéramos dos personas que se dan la oportunidad de ser amigos. Y si algo más nace, que nazca solo, sin que lo obliguemos a existir
+        </div>
+
+        <div class="music-controls">
+            <button class="btn-music" onclick="playMusic()">▶️ Poner</button>
+            <button class="btn-music" onclick="pauseMusic()">⏸️ Pausar</button>
+            <button class="btn-music" onclick="stopMusic()">⏹️ Quitar</button>
+        </div>
+    </div>
+
+    <div id="otra-parte">
+        <h1>Es otra cosa relevante ✨</h1>
+        <p> Quiero decirte algo con calma, sin que se malinterprete. Lo que hago, lo que hablo contigo o el interés que muestro, no es porque esté buscando algo más allá ni porque quiera forzar una relación. No lo hago con una intención escondida ni con la
+            idea de que tenga que pasar algo entre nosotros. Simplemente me agrada la idea de que podamos llevarnos bien, de que haya buena vibra, de que podamos platicar y pasarla bien. A veces intento acercarme un poco más, conocerte, saber qué te gusta,
+            cómo eres, qué piensas… pero no porque esté intentando “llegarte” para algo romántico, sino porque me gustaría que, si se da algo, sea algo natural. Y si lo que se da es solo una amistad, está bien. De verdad. No quiero que se sienta como
+            presión ni como que estoy esperando algo a cambio. Si en algún momento parece que intento ver si hay algo más, no es por insistir, sino por entender qué tipo de conexión podemos tener. Y si la conexión es solo de amigos, me parece perfecto.
+            Prefiero que lo que exista entre nosotros sea sincero, sin forzarlo, sin expectativas pesadas. Solo dos personas que se tratan bien, se respetan y ven qué pasa con el tiempo. Nada más. Sin complicaciones.</p>
+        <button class="btn-nav" onclick="volver()">Volver atrás</button>
+    </div>
+
+    <audio id="miMusica" loop>
+        <source src="https://www.dropbox.com/scl/fi/qfv28rqu6b36jwusao4x4/Love.MP3?rlkey=ptjd053374f028aa4jfcfrfxn&st=1j0j51eo&raw=1 " type="audio/mpeg">
+        Tu navegador no soporta audio.
+    </audio>
+
+    <script>
+        // Función para mostrar el texto de Abril
+        function mostrarTexto() {
+            document.getElementById('texto-abril').style.display = 'block';
+        }
+
+        // Navegación
+        function irAOtraParte() {
+            document.getElementById('otra-parte').style.display = 'flex';
+        }
+
+        function volver() {
+            document.getElementById('otra-parte').style.display = 'none';
+        }
+
+        // Control de Música
+        const musica = document.getElementById('miMusica');
+
+        function playMusic() {
+            musica.play();
+        }
+
+        function pauseMusic() {
+            musica.pause();
+        }
+
+        function stopMusic() {
+            musica.pause();
+            musica.currentTime = 0;
+        }
+
+        // Generador de Corazones
+        function crearCorazon() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+            heart.style.opacity = Math.random();
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+
+        setInterval(crearCorazon, 300);
+    </script>
+</body>
+
+</html>
